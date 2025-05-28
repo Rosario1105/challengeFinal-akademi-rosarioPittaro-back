@@ -2,7 +2,7 @@ const express = require("express");
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require ('jsonwebtoken');
-const sendEmails = require("../utils/sendEmails");
+//const sendEmails = require("../utils/sendEmails");
 
 const register = async (req, res) =>{
     const { name, email, password, dni} = req.body;
@@ -47,3 +47,8 @@ const login = async (req, res) => {
         res.status(500).json({msg: 'Error del servidor'});
     }
 }
+
+module.exports = {
+  register,
+  login
+};
