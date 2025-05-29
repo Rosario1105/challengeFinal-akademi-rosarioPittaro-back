@@ -25,4 +25,11 @@ const isSuperAdmin = (req, res, next) =>{
     next();
 };
 
-module.exports = {authMiddleware, isSuperAdmin};
+const isProfesor = (req, res, next) => {
+    if(req.user.role !== 'profesor'){
+        return res.status(403).json({msg: 'Acceso denegado (solo profesores)'});
+    }
+    next();
+};
+
+module.exports = {authMiddleware, isSuperAdmin, isProfesor};
