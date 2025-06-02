@@ -7,6 +7,7 @@ const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const courseRoutes = require('./routes/courseRoutes');
 const enrollmentRoutes = require ('./routes/enrollmentRoutes');
+const qualitationRoutes = require('./routes/qualitationRoutes');
 connectDB();
 const app = express();
 
@@ -20,6 +21,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/course', courseRoutes);
 app.use('/api/enrollment', enrollmentRoutes);
+app.use('/api/qualitations', qualitationRoutes);
 app.get("/", (req, res) => {
   res.send("API de CURSOS VORTEX");
 });
