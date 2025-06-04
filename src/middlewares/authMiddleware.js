@@ -1,35 +1,40 @@
-const jwt = require ('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
-
 const authMiddleware = async (req, res, next) => {
-    const authHeader = req.headears.authorization;
-    if(!authHeader || !authHeader.startsWith('Bearer'))
-        return res.status(401).json({msg:'Token faltante o invalido'});
+  const authHeader = req.headers.authorization;
 
-    const token = authHeader.split('')[1];
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return res.status(401).json({ msg: 'Token faltante o inválido' });
+  }
 
-    try{
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        req.user = await User.findById(decoded.id).select('-password');
-        next();
-    } catch (err){
-        return res.status(401).json({msg:'Token invalidado'});
-    }
+  const token = authHeader.split(' ')[1];
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = await User.findById(decoded.id).select('-password');
+    next();
+  } catch (err) {
+    return res.status(401).json({ msg: 'Token inválido' });
+  }
 };
 
-const isSuperAdmin = (req, res, next) =>{
-    if(req.user.role !== 'superadmin'){
-        return res.status(403).json({msg:'Acceso denegado(solo superadmin)'});
-    }
-    next();
+const isSuperAdmin = (req, res, next) => {
+  if (req.user.role !== 'superadmin') {
+    return res.status(403).json({ msg: 'Acceso denegado (solo superadmin)' });
+  }
+  next();
 };
 
 const isProfesor = (req, res, next) => {
-    if(req.user.role !== 'profesor'){
-        return res.status(403).json({msg: 'Acceso denegado (solo profesores)'});
-    }
-    next();
+  if (req.user.role !== 'profesor') {
+    return res.status(403).json({ msg: 'Acceso denegado (solo profesor)' });
+  }
+  next();
 };
 
-module.exports = {authMiddleware, isSuperAdmin, isProfesor};
+module.exports = {
+  authMiddleware,
+  isSuperAdmin,
+  isProfesor
+};

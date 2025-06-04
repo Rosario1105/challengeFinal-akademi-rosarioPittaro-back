@@ -1,6 +1,31 @@
 const Enrollment = require ('../models/Enrollment');
-const Course = require ('../models/User');
+const Course = require ('../models/Course');
 
+
+const getStudentsByProfesor = async (req, res) => {
+  try {
+    const cursos = await Course.find({ profesor: req.user._id }).select('_id title');
+
+    const cursosIds = cursos.map(curso => curso._id);
+
+    const enrollments = await Enrollment.find({ courseId: { $in: cursosIds } })
+      .populate('studentId', 'name email dni')
+      .populate('courseId', 'title');
+
+    const alumnos = enrollments.map(e => ({
+      id: e.studentId._id,
+      name: e.studentId.name,
+      email: e.studentId.email,
+      dni: e.studentId.dni,
+      curso: e.courseId.title,
+    }));
+
+    res.json(alumnos);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: 'Error al obtener alumnos del profesor' });
+  }
+};
 
 const getEnrollmentsByStudent = async (req,res) => {
     const {id} = req.params;
@@ -70,5 +95,5 @@ const cancelEnrollment = async (req, res) => {
 };
 
 module.exports = {
-getEnrollmentsByCourse, getEnrollmentsByStudent, enrollInCourse, cancelEnrollment
+getEnrollmentsByCourse, getEnrollmentsByStudent, enrollInCourse, cancelEnrollment, getStudentsByProfesor
 };

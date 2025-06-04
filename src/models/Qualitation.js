@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const qualitationSchema = new mongoose.Schema({
     studentId: {type: mongoose.Schema.Types.ObjectId, ref:'User', required: true},
     courseId: {type: mongoose.Schema.Types.ObjectId, ref:'Curse', required: true},
-    score: {type: Numer, required: true, min:0, max:100},
+    score: {type: Number, required: true, min:0, max:100},
     feedback: {type: String}
 }, {timestamps: true});
 

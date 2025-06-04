@@ -58,4 +58,4 @@ const getCourseByProfesor = async (req,res) => {
     res.json(cursos);
 };
 
-
+module.exports = {getAllCourses, getCourseById, createCourse, updateCourse, deleteCourse, getCourseByProfesor}

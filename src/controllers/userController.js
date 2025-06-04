@@ -46,7 +46,7 @@ const deleteUser = async (req, res) => {
     const user = await User.findById(req.params.id);
     if(!user) return res.status(404).json({message: 'Usuario no encontrado'});
 
-    if(user.role === !profesor){
+    if(user.role === !"profesor"){
         const cursos = await Course.find({profesor: user._id});
         if(cursos.length > 0){
             return res.status(400).json({msg: 'No se puede eliminar profesor con cursos'});
