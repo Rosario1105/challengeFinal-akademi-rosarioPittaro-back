@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const Course = require('../models/Course');
+const bcrypt = require('bcryptjs');
 
 const getAllUsers = async (req, res) => {
     const users = await User.find().select('-password');
@@ -26,7 +27,9 @@ const createUser = async (req,res) => {
     const exists = await User.findOne({email});
     if(exists) return res.status(400).json({msg: 'El email ya esta registrado'});
 
-    const user = new User({name, email, password, role});
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const user = new User({name, email, password: hashedPassword, role});
     await user.save();
 
     res.status(201).json({msg:'Usuario creado'});

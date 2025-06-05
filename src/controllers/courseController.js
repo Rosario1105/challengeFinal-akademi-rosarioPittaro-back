@@ -54,7 +54,7 @@ const deleteCourse = async (req, res) => {
 };
 
 const getCourseByProfesor = async (req,res) => {
-    const cursos = await Course.find({profesor: req.user._id});
+    const cursos = await Course.find({profesor: req.user.id});
     res.json(cursos);
 };
 
