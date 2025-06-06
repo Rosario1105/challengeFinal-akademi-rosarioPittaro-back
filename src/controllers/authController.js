@@ -65,9 +65,13 @@ const login = async (req, res) => {
 };
 
 const recoverPasswordRequest = async (req, res) => {
-  const { email } = req.body;
-
   try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({ msg: "Email es requerido" });
+    }
+
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(404).json({ msg: "Usuario no encontrado" });
@@ -77,11 +81,13 @@ const recoverPasswordRequest = async (req, res) => {
       expiresIn: "1h",
     });
 
-    const resetLink = `http://localhost:7000/reset-password/${resetToken}`;
+    const frontendURL = 'http://localhost:5713';
+const resetLink = `${frontendURL}/reset-password/${resetToken}`;
+
 
     const html = `
       <h2>Recuperación de contraseña</h2>
-      <p>Hacé clic en el siguiente enlace para restablecer tu contraseña:</p>
+      <p>Haz clic en el siguiente enlace para restablecer tu contraseña:</p>
       <a href="${resetLink}">${resetLink}</a>
       <p>Este enlace es válido por 1 hora.</p>
     `;
@@ -90,12 +96,14 @@ const recoverPasswordRequest = async (req, res) => {
 
     res.json({ message: "Correo enviado con éxito" });
   } catch (error) {
+    console.error("Error en recoverPasswordRequest:", error);
     res.status(500).json({
       message: "Error al procesar la solicitud",
       error: error.message,
     });
   }
 };
+
 
 const resetPassword = async (req, res) => {
   const { token } = req.params;
