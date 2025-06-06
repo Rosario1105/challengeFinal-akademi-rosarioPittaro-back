@@ -6,11 +6,21 @@ const getAllCourses = async (req, res) => {
     res.json(courses);
 };
 
+const mongoose = require('mongoose');
+
 const getCourseById = async (req,res) => {
-    const course = await Course.findById(req.params.id).populate('profesor', 'name email');
+    const { id } = req.params;
+
+    if(!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({msg: 'ID de curso inválido'});
+    }
+
+    console.log("Buscando curso con ID:", id);
+    const course = await Course.findById(id).populate('profesor', 'name email');
     if(!course) return res.status(404).json({msg: 'Curso no encontrado'});
     res.json(course);
 };
+
 
 const createCourse = async (req, res) => {
     const {title, description, category, level, price, capacity } = req.body;

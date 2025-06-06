@@ -34,5 +34,22 @@ const getQualitationsByStudent = async (req,res) => {
     const qualitations = await Qualitation.find({studentId: req.params.id}).populate('courseId', 'title');
     res.json(qualitations);
 };
+const deleteQualitation = async (req, res) => {
+  try {
+    const qualitation = await Qualitation.findById(req.params.id);
+    if (!qualitation) return res.status(404).json({ msg: "Calificación no encontrada" });
 
-module.exports = {createQualitation, updateQualitation, getQualitationsByStudent};
+    const course = await Course.findById(qualitation.courseId);
+    if (course.profesor.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ msg: "No autorizado para eliminar esta calificación" });
+    }
+
+    await qualitation.deleteOne();
+    res.json({ msg: "Calificación eliminada correctamente" });
+  } catch (err) {
+    res.status(500).json({ msg: "Error al eliminar calificación" });
+  }
+};
+
+
+module.exports = {createQualitation, updateQualitation, getQualitationsByStudent, deleteQualitation};

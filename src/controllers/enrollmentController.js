@@ -1,6 +1,6 @@
 const Enrollment = require ('../models/Enrollment');
 const Course = require ('../models/Course');
-
+const Qualitation = require('../models/Qualitation');
 
 const getStudentsByProfesor = async (req, res) => {
   try {
@@ -12,12 +12,19 @@ const getStudentsByProfesor = async (req, res) => {
       .populate('studentId', 'name email dni')
       .populate('courseId', 'title');
 
-    const alumnos = enrollments.map(e => ({
-      id: e.studentId._id,
-      name: e.studentId.name,
-      email: e.studentId.email,
-      dni: e.studentId.dni,
-      curso: e.courseId.title,
+    const alumnos = await Promise.all(enrollments.map(async e => {
+      const qual = await Qualitation.findOne({ studentId: e.studentId._id, courseId: e.courseId._id });
+      return {
+        enrollmentId: e._id,
+        studentId: e.studentId._id,
+        name: e.studentId.name,
+        email: e.studentId.email,
+        dni: e.studentId.dni,
+        curso: e.courseId.title,
+        grade: qual ? qual.score : null,
+        feedback: qual ? qual.feedback : null,
+        qualId: qual ? qual._id : null,
+      };
     }));
 
     res.json(alumnos);

@@ -4,28 +4,26 @@ const bcrypt = require('bcryptjs');
 const jwt = require ('jsonwebtoken');
 //const sendEmails = require("../utils/sendEmails");
 
-const register = async (req, res) =>{
-    const { name, email, password, dni} = req.body;
+const register = async (req, res) => {
+  const { name, email, password, dni } = req.body;
 
-    try{
-        const exists = await User.findOne({ email });
-        if(exists) return res.status(400).json({msg: 'El usuario ya existe'});
+  try {
+    const exists = await User.findOne({ email });
+    if (exists) return res.status(400).json({ msg: 'El usuario ya existe' });
 
-        const hashedPassword = await bcrypt.hash(password, 10);
+    const user = new User({
+      name,
+      email,
+      password, // Ya no se hashea acá
+      role: 'alumno',
+      dni
+    });
 
-        const user = new User({
-            name, 
-            email,
-            password: hashedPassword, 
-            role: 'alumno',
-            dni
-        });
-
-        await user.save();
-        res.status(201).json({msg:"Alumno registrado correctamente"});
-    } catch(err){
-        res.status(500).json({msg: "Error del servidor"})
-    }
+    await user.save();
+    res.status(201).json({ msg: "Alumno registrado correctamente" });
+  } catch (err) {
+    res.status(500).json({ msg: "Error del servidor" });
+  }
 };
 
 const login = async (req, res) => {
