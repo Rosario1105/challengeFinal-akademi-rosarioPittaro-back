@@ -11,12 +11,14 @@ const {
 } = require ('../controllers/courseController');
 
 const {authMiddleware, isProfesor} = require('../middlewares/authMiddleware');
-
 router.get('/', authMiddleware, getAllCourses);
-router.get('/:id', authMiddleware, getCourseById);
+
+router.get('/profesorId/List', authMiddleware, isProfesor, getCourseByProfesor);
+
+router.get('/:id', authMiddleware, getCourseById); 
 router.post('/', authMiddleware, isProfesor, createCourse);
 router.put('/:id', authMiddleware, isProfesor, updateCourse);
-router.delete('/:id', authMiddleware, isProfesor,deleteCourse);
-router.get('/profesorId/List', authMiddleware, isProfesor, getCourseByProfesor);
+router.delete('/:id', authMiddleware, isProfesor, deleteCourse);
+
 
 module.exports = router;

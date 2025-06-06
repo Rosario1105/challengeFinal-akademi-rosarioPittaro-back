@@ -1,24 +1,29 @@
+const mongoose = require('mongoose');
 const Course = require('../models/Course');
-
+const Enrollment = require('../models/Enrollment')
 
 const getAllCourses = async (req, res) => {
     const courses = await Course.find().populate('profesor', 'name email');
+    console.log("Cursos disponibles:", courses.map(c => c._id.toString()));
     res.json(courses);
 };
 
-const mongoose = require('mongoose');
 
-const getCourseById = async (req,res) => {
-    const { id } = req.params;
+const getCourseById = async (req, res) => {
+  try {
+    const curso = await Course.findById(req.params.id).select('title description category level price capacity');
+    if (!curso) return res.status(404).json({ mensaje: 'Curso no encontrado' });
 
-    if(!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(400).json({msg: 'ID de curso inválido'});
-    }
+    const inscritosCount = await Enrollment.countDocuments({ courseId: curso._id });
 
-    console.log("Buscando curso con ID:", id);
-    const course = await Course.findById(id).populate('profesor', 'name email');
-    if(!course) return res.status(404).json({msg: 'Curso no encontrado'});
-    res.json(course);
+    const cursoObj = curso.toObject();
+    cursoObj.inscriptos = inscritosCount;
+
+    res.json(cursoObj);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ mensaje: 'Error interno del servidor' });
+  }
 };
 
 

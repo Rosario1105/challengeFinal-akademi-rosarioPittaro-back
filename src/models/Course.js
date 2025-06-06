@@ -6,7 +6,8 @@ const courseSchema = new mongoose.Schema({
   category: { type: String },
   level: { type: String, enum: ['Basico', 'Intermedio', 'Avanzado'], default: 'Basico'},
   price: {type: Number, default: 0},
-capacity: { type: Number, default: 30 },
+capacity: { type: Number, default: 10 },
+currentCapacity: {type:Number, required:true},
 profesor: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true}
 }, { timestamps: true });
 
