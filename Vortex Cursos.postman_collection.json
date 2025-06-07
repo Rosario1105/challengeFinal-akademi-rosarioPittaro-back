@@ -1,0 +1,1093 @@
+{
+	"info": {
+		"_postman_id": "e88ba15a-152d-460a-a90e-fe5f7f4b4ab4",
+		"name": "Vortex Cursos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27744920",
+		"_collection_link": "https://vortex-cursos.postman.co/workspace/VORTEX-CURSOS~d2d927f2-bdbd-46ba-8d2b-89c4cb7392e4/collection/27744920-e88ba15a-152d-460a-a90e-fe5f7f4b4ab4?action=share&source=collection_link&creator=27744920"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "User log in admin",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-superadmin-key",
+								"value": "miclavesupersecreta",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \r\n  \"email\": \"rosario.pittaro1105@gmail.com\",\r\n  \"password\": \"Rosario11\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User log in alumno",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-superadmin-key",
+								"value": "miclavesupersecreta",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \r\n  \"email\": \"maxi.diaz66@gmail.com\",\r\n  \"password\": \"maxi\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User log in profesor",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-superadmin-key",
+								"value": "miclavesupersecreta",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \r\n  \"email\": \"susanapittaro17@gmail.com\",\r\n  \"password\": \"Susana\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register Alumno",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-superadmin-key",
+								"value": "miclavesupersecreta",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"lia\",\r\n  \"email\": \"lia2@gmail.com\",\r\n  \"password\": \"lia123\",\r\n  \"dni\": \"1234568\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot Password",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-superadmin-key",
+								"value": "miclavesupersecreta",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"rosario.pittaro1105@gmail.com\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/auth/forgot-password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"forgot-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset Password",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-superadmin-key",
+								"value": "miclavesupersecreta",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"rosario.pittaro1105@gmail.com\",\r\n    \"password\":\"Rosario11\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/auth/reset-password/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDM0NzBjNmZiNDZmNTk4YmJiMWI5NSIsImlhdCI6MTc0OTMwODgyMywiZXhwIjoxNzQ5MzEyNDIzfQ.sLEgGxGLxes_9wCLl9XZTgfztWdfuhup2xmF3_C0los",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"reset-password",
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDM0NzBjNmZiNDZmNTk4YmJiMWI5NSIsImlhdCI6MTc0OTMwODgyMywiZXhwIjoxNzQ5MzEyNDIzfQ.sLEgGxGLxes_9wCLl9XZTgfztWdfuhup2xmF3_C0los"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Get All User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDM0NzBjNmZiNDZmNTk4YmJiMWI5NSIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNzQ5MzA4OTYxLCJleHAiOjE3NDkzOTUzNjF9.Bg8LikRSdrdhhpbhm-OIqhqKgebZxg7PrcKbFvAmU74",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All User Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDM0NzBjNmZiNDZmNTk4YmJiMWI5NSIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNzQ5MzA4OTYxLCJleHAiOjE3NDkzOTUzNjF9.Bg8LikRSdrdhhpbhm-OIqhqKgebZxg7PrcKbFvAmU74",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Profesor",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDM0NzBjNmZiNDZmNTk4YmJiMWI5NSIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNzQ5MzA4OTYxLCJleHAiOjE3NDkzOTUzNjF9.Bg8LikRSdrdhhpbhm-OIqhqKgebZxg7PrcKbFvAmU74",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Roberto Pittaro\",\r\n    \"email\":\"robert@gmail.com\",\r\n    \"password\":\"Roberto\",\r\n    \"role\":\"profesor\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Profesor",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDM0NzBjNmZiNDZmNTk4YmJiMWI5NSIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNzQ5MzA4OTYxLCJleHAiOjE3NDkzOTUzNjF9.Bg8LikRSdrdhhpbhm-OIqhqKgebZxg7PrcKbFvAmU74",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Juanchi Perecito\",\r\n    \"email\":\"juanchito@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/users/684349e39f19c2b40516fa14",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"684349e39f19c2b40516fa14"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDM0NzBjNmZiNDZmNTk4YmJiMWI5NSIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNzQ5MzA4OTYxLCJleHAiOjE3NDkzOTUzNjF9.Bg8LikRSdrdhhpbhm-OIqhqKgebZxg7PrcKbFvAmU74",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Roberto Pittaro\",\r\n    \"email\":\"robert@gmail.com\",\r\n    \"password\":\"Roberto\",\r\n    \"role\":\"profesor\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/users/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Courses",
+			"item": [
+				{
+					"name": "Get All Courses",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDM0NzBjNmZiNDZmNTk4YmJiMWI5NSIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNzQ5MzA4OTYxLCJleHAiOjE3NDkzOTUzNjF9.Bg8LikRSdrdhhpbhm-OIqhqKgebZxg7PrcKbFvAmU74",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Roberto Pittaro\",\r\n    \"email\":\"robert@gmail.com\",\r\n    \"password\":\"Roberto\",\r\n    \"role\":\"profesor\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/courses",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"courses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Course",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDM0NzBjNmZiNDZmNTk4YmJiMWI5NSIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNzQ5MzA4OTYxLCJleHAiOjE3NDkzOTUzNjF9.Bg8LikRSdrdhhpbhm-OIqhqKgebZxg7PrcKbFvAmU74",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Roberto Pittaro\",\r\n    \"email\":\"robert@gmail.com\",\r\n    \"password\":\"Roberto\",\r\n    \"role\":\"profesor\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/courses/6842315a810c3691f941d4c4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"courses",
+								"6842315a810c3691f941d4c4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Course By Profesor",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDM0NzBjNmZiNDZmNTk4YmJiMWI5NSIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNzQ5MzA4OTYxLCJleHAiOjE3NDkzOTUzNjF9.Bg8LikRSdrdhhpbhm-OIqhqKgebZxg7PrcKbFvAmU74",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Roberto Pittaro\",\r\n    \"email\":\"robert@gmail.com\",\r\n    \"password\":\"Roberto\",\r\n    \"role\":\"profesor\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/courses/profesor/6841296971d1c35a407348cf",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"courses",
+								"profesor",
+								"6841296971d1c35a407348cf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDEyOTY5NzFkMWMzNWE0MDczNDhjZiIsInJvbGUiOiJwcm9mZXNvciIsImlhdCI6MTc0OTMxNzAwNywiZXhwIjoxNzQ5NDAzNDA3fQ.269eou0CHdGx9XGTMLdeUwUm3ykfMPBKHBWPUe0R75Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"React para avanzado\",\r\n        \"description\": \"React super avanzando y master\",\r\n        \"category\": \"Frontend\",\r\n        \"level\": \"basico\",\r\n        \"price\": 11,\r\n        \"capacity\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/courses",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"courses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edite Course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDEyOTY5NzFkMWMzNWE0MDczNDhjZiIsInJvbGUiOiJwcm9mZXNvciIsImlhdCI6MTc0OTMxNzAwNywiZXhwIjoxNzQ5NDAzNDA3fQ.269eou0CHdGx9XGTMLdeUwUm3ykfMPBKHBWPUe0R75Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Machine Learning e industria 4.0\",\r\n    \"description\": \"Machine Learning e industria 4.0\\n\",\r\n    \"category\": \"Aprendizaje automatico\",\r\n    \"level\": \"Basico\",\r\n    \"price\": 21,\r\n    \"capacity\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/courses/68430bcf098971dbab554c1b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"courses",
+								"68430bcf098971dbab554c1b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDEyOTY5NzFkMWMzNWE0MDczNDhjZiIsInJvbGUiOiJwcm9mZXNvciIsImlhdCI6MTc0OTMxNzAwNywiZXhwIjoxNzQ5NDAzNDA3fQ.269eou0CHdGx9XGTMLdeUwUm3ykfMPBKHBWPUe0R75Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Machine Learning e industria 4.0\",\r\n    \"description\": \"Machine Learning e industria 4.0\\n\",\r\n    \"category\": \"Aprendizaje automatico\",\r\n    \"level\": \"Basico\",\r\n    \"price\": 21,\r\n    \"capacity\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/courses/68430bcf098971dbab554c1b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"courses",
+								"68430bcf098971dbab554c1b"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Enrollments",
+			"item": [
+				{
+					"name": "Get Enrollments By Course",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDEyOTU1NzFkMWMzNWE0MDczNDhjYiIsInJvbGUiOiJwcm9mZXNvciIsImlhdCI6MTc0OTMyMTI3MCwiZXhwIjoxNzQ5NDA3NjcwfQ.vVhjLahGaXW3E1A52kv5pUmzmvjfy9h7oA49MXLEOfE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Roberto Pittaro\",\r\n    \"email\":\"robert@gmail.com\",\r\n    \"password\":\"Roberto\",\r\n    \"role\":\"profesor\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/enrollments/course/684343ddb78db831320c4af8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"enrollments",
+								"course",
+								"684343ddb78db831320c4af8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Enrollments By Course",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDEyOTU1NzFkMWMzNWE0MDczNDhjYiIsInJvbGUiOiJwcm9mZXNvciIsImlhdCI6MTc0OTMyMTI3MCwiZXhwIjoxNzQ5NDA3NjcwfQ.vVhjLahGaXW3E1A52kv5pUmzmvjfy9h7oA49MXLEOfE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Roberto Pittaro\",\r\n    \"email\":\"robert@gmail.com\",\r\n    \"password\":\"Roberto\",\r\n    \"role\":\"profesor\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/enrollments/course/684343ddb78db831320c4af8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"enrollments",
+								"course",
+								"684343ddb78db831320c4af8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Enrollments By Student",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDEyOTU1NzFkMWMzNWE0MDczNDhjYiIsInJvbGUiOiJwcm9mZXNvciIsImlhdCI6MTc0OTMyMTQyNCwiZXhwIjoxNzQ5NDA3ODI0fQ.EB1q5zLRrABAMJroW-z8tNDrP9hr-Krqar6AD3DWtPE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-superadmin-key",
+								"value": "miclavesupersecreta",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \r\n  \"email\": \"susanapittaro17@gmail.com\",\r\n  \"password\": \"Susana\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/enrollments/student/684484b441f70117e11ece6e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"enrollments",
+								"student",
+								"684484b441f70117e11ece6e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Enrollment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDQ4NGI0NDFmNzAxMTdlMTFlY2U2ZSIsInJvbGUiOiJhbHVtbm8iLCJpYXQiOjE3NDkzMjM4NDgsImV4cCI6MTc0OTQxMDI0OH0.HlJXXNtZB6NZe0mE8h4mkngVjDFzeysWzWI-sQuKGKY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-superadmin-key",
+								"value": "miclavesupersecreta",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"courseId\": \"684475af2ecab4fe2d845f1e\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/enrollments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"enrollments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Enrollment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDFlYjdiZjJmNTM5OGJjOWE4ZjkzNyIsInJvbGUiOiJhbHVtbm8iLCJpYXQiOjE3NDkzMjg2NDMsImV4cCI6MTc0OTQxNTA0M30.wT9dmCFaOW7iSG73dbxeOsof0Ila4zkp_2t1fGuSd_o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-superadmin-key",
+								"value": "miclavesupersecreta",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"courseId\": \"684475af2ecab4fe2d845f1e\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/enrollments/6841eb7bf2f5398bc9a8f937",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"enrollments",
+								"6841eb7bf2f5398bc9a8f937"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Qualitations",
+			"item": [
+				{
+					"name": "Create Qualitation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDEyOTU1NzFkMWMzNWE0MDczNDhjYiIsInJvbGUiOiJwcm9mZXNvciIsImlhdCI6MTc0OTMyOTA2MywiZXhwIjoxNzQ5NDE1NDYzfQ.UUd8-bsO-JyKL6xx5xwLN8FTgfQmQJfkTG2upcJyRQw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"courseId\":\"68430bcf098971dbab554c1b\",\r\n   \"studentId\":\"6841eb7bf2f5398bc9a8f937\",\r\n   \"score\":\"8\",\r\n   \"feedback\":\"Muy buen trabajo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/qualitations",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"qualitations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Qualitation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDEyOTU1NzFkMWMzNWE0MDczNDhjYiIsInJvbGUiOiJwcm9mZXNvciIsImlhdCI6MTc0OTMyOTA2MywiZXhwIjoxNzQ5NDE1NDYzfQ.UUd8-bsO-JyKL6xx5xwLN8FTgfQmQJfkTG2upcJyRQw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"score\": 10,\r\n  \"feedback\": \"Mejoró notablemente en la evaluación final.\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/qualitations/6844a4b2a97b1bc735bb4485",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"qualitations",
+								"6844a4b2a97b1bc735bb4485"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Qualitations By Student",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDEyOTU1NzFkMWMzNWE0MDczNDhjYiIsInJvbGUiOiJwcm9mZXNvciIsImlhdCI6MTc0OTMyOTA2MywiZXhwIjoxNzQ5NDE1NDYzfQ.UUd8-bsO-JyKL6xx5xwLN8FTgfQmQJfkTG2upcJyRQw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"score\": 10,\r\n  \"feedback\": \"Mejoró notablemente en la evaluación final.\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/qualitations/student/6841eb7bf2f5398bc9a8f937",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"qualitations",
+								"student",
+								"6841eb7bf2f5398bc9a8f937"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Qualitation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDEyOTU1NzFkMWMzNWE0MDczNDhjYiIsInJvbGUiOiJwcm9mZXNvciIsImlhdCI6MTc0OTMyOTA2MywiZXhwIjoxNzQ5NDE1NDYzfQ.UUd8-bsO-JyKL6xx5xwLN8FTgfQmQJfkTG2upcJyRQw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"score\": 10,\r\n  \"feedback\": \"Mejoró notablemente en la evaluación final.\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/qualitations/68430ae8b0543c2b8727aa9c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"qualitations",
+								"68430ae8b0543c2b8727aa9c"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "http://localhost:8000/api/users",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDM0NzBjNmZiNDZmNTk4YmJiMWI5NSIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNzQ5MzA4OTYxLCJleHAiOjE3NDkzOTUzNjF9.Bg8LikRSdrdhhpbhm-OIqhqKgebZxg7PrcKbFvAmU74",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
