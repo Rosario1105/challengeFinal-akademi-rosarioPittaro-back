@@ -34,13 +34,11 @@ const getAllCourses = async (req, res) => {
       typeof level !== "string" ||
       !allowedLevels.includes(level.toLowerCase())
     ) {
-      return res
-        .status(400)
-        .json({
-          msg: `Parámetro "level" inválido. Debe ser uno de: ${allowedLevels.join(
-            ", "
-          )}.`,
-        });
+      return res.status(400).json({
+        msg: `Parámetro "level" inválido. Debe ser uno de: ${allowedLevels.join(
+          ", "
+        )}.`,
+      });
     }
     level = level.toLowerCase();
 
@@ -59,13 +57,11 @@ const getAllCourses = async (req, res) => {
       sortDirection = -1;
     }
     if (!allowedSortFields.includes(sortField)) {
-      return res
-        .status(400)
-        .json({
-          msg: `Parámetro "sort" inválido. Debe ser uno de: ${allowedSortFields.join(
-            ", "
-          )} o con "-" delante.`,
-        });
+      return res.status(400).json({
+        msg: `Parámetro "sort" inválido. Debe ser uno de: ${allowedSortFields.join(
+          ", "
+        )} o con "-" delante.`,
+      });
     }
 
     const filters = {};
@@ -105,9 +101,9 @@ const getCourseById = async (req, res) => {
   }
 
   try {
-    const curso = await Course.findById(id).select(
-      "title description category level price capacity"
-    );
+    const curso = await Course.findById(id)
+      .select("title description category level price capacity profesor")
+      .populate("profesor", "name email");
     if (!curso) {
       return res.status(404).json({ msg: "Curso no encontrado." });
     }
@@ -140,11 +136,9 @@ const createCourse = async (req, res) => {
     price === undefined ||
     capacity === undefined
   ) {
-    return res
-      .status(400)
-      .json({
-        msg: "Campos obligatorios: title, description, category, level, price, capacity.",
-      });
+    return res.status(400).json({
+      msg: "Campos obligatorios: title, description, category, level, price, capacity.",
+    });
   }
 
   if (
@@ -162,11 +156,9 @@ const createCourse = async (req, res) => {
     description.trim().length < 8 ||
     description.trim().length > 200
   ) {
-    return res
-      .status(400)
-      .json({
-        msg: "Descripción inválida. Debe tener entre 8 y 200 caracteres.",
-      });
+    return res.status(400).json({
+      msg: "Descripción inválida. Debe tener entre 8 y 200 caracteres.",
+    });
   }
 
   if (typeof category !== "string" || category.trim().length === 0) {
@@ -177,11 +169,9 @@ const createCourse = async (req, res) => {
     !allowedLevels.includes(level.toLowerCase()) ||
     level.toLowerCase() === "todos"
   ) {
-    return res
-      .status(400)
-      .json({
-        msg: `Nivel inválido. Debe ser uno de: basico, intermedio, avanzado.`,
-      });
+    return res.status(400).json({
+      msg: `Nivel inválido. Debe ser uno de: basico, intermedio, avanzado.`,
+    });
   }
 
   const numericPrice = Number(price);
@@ -276,11 +266,9 @@ const updateCourse = async (req, res) => {
             value.trim().length < 8 ||
             value.trim().length > 100
           ) {
-            return res
-              .status(400)
-              .json({
-                msg: "Título inválido. Debe tener entre 8 y 100 caracteres.",
-              });
+            return res.status(400).json({
+              msg: "Título inválido. Debe tener entre 8 y 100 caracteres.",
+            });
           }
           payload.title = value.trim();
           break;
@@ -291,11 +279,9 @@ const updateCourse = async (req, res) => {
             value.trim().length < 8 ||
             value.trim().length > 200
           ) {
-            return res
-              .status(400)
-              .json({
-                msg: "Descripción inválida. Debe tener entre 8 y 200 caracteres.",
-              });
+            return res.status(400).json({
+              msg: "Descripción inválida. Debe tener entre 8 y 200 caracteres.",
+            });
           }
           payload.description = value.trim();
           break;
@@ -312,11 +298,9 @@ const updateCourse = async (req, res) => {
             !allowedLevels.includes(value.toLowerCase()) ||
             value.toLowerCase() === "todos"
           ) {
-            return res
-              .status(400)
-              .json({
-                msg: "Nivel inválido. Debe ser basico, intermedio o avanzado.",
-              });
+            return res.status(400).json({
+              msg: "Nivel inválido. Debe ser basico, intermedio o avanzado.",
+            });
           }
           payload.level = value.toLowerCase();
           break;
@@ -343,7 +327,6 @@ const updateCourse = async (req, res) => {
       }
     }
 
-    // 4) Actualizar y devolver nuevo curso
     const updated = await Course.findByIdAndUpdate(id, payload, {
       new: true,
       runValidators: true,
@@ -394,19 +377,21 @@ const deleteCourse = async (req, res) => {
 };
 
 const getCourseByProfesor = async (req, res) => {
-  const profesorId = req.user._id;
+  const { id } = req.params;
+
+  if (!isValidObjectId(id)) {
+    return res.status(400).json({ msg: "ID de profesor inválido." });
+  }
 
   try {
-    const cursos = await Course.find({ profesor: profesorId });
+    const cursos = await Course.find({ profesor: id });
     return res.json(cursos);
   } catch (err) {
     console.error(err);
-    return res
-      .status(500)
-      .json({
-        msg: "Error al obtener cursos del profesor.",
-        error: err.message,
-      });
+    return res.status(500).json({
+      msg: "Error al obtener cursos del profesor.",
+      error: err.message,
+    });
   }
 };
 

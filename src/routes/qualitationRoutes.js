@@ -7,10 +7,10 @@ const {
   deleteQualitation,
 } = require("../controllers/qualitationController");
 
-const { authMiddleware } = require("../middlewares/authMiddleware");
-router.post("/", authMiddleware, createQualitation);
-router.put("/:id", authMiddleware, updateQualitation);
+const { authMiddleware,isProfesor } = require("../middlewares/authMiddleware");
+router.post("/", authMiddleware, createQualitation,isProfesor);
+router.put("/:id", authMiddleware, updateQualitation,isProfesor);
 router.get("/student/:id", authMiddleware, getQualitationsByStudent);
-router.delete("/:id", authMiddleware, deleteQualitation);
+router.delete("/:id", authMiddleware, deleteQualitation,isProfesor);
 
 module.exports = router;

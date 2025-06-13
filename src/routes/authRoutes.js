@@ -9,7 +9,6 @@ const {
 
 router.post("/register", register);
 router.post("/login", login);
-
 router.post("/forgot-password", recoverPasswordRequest);
 router.post("/reset-password/:token", resetPassword);
 

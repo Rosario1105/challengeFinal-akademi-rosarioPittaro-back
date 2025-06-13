@@ -2,16 +2,12 @@ const mongoose = require("mongoose");
 const Qualitation = require("../models/Qualitation");
 const Course = require("../models/Course");
 
-// Utilitario para validar ObjectId
 const isValidObjectId = (id) => mongoose.Types.ObjectId.isValid(id);
 
-// ======================
-// POST /api/qualitations
-// ======================
+
 const createQualitation = async (req, res) => {
   const { studentId, courseId, score, feedback } = req.body;
 
-  // 1) Validar que studentId y courseId sean ObjectId válidos
   if (!studentId || !isValidObjectId(studentId)) {
     return res
       .status(400)
@@ -27,12 +23,12 @@ const createQualitation = async (req, res) => {
       });
   }
 
-  // 2) Validar score
   if (score === undefined || score === null || isNaN(score)) {
     return res
       .status(400)
       .json({ msg: "El campo score es obligatorio y debe ser numérico." });
   }
+  
   const numericScore = Number(score);
   if (numericScore < 0 || numericScore > 100) {
     return res

@@ -150,16 +150,34 @@ const getEnrollmentsByStudent = async (req, res) => {
   }
 
   try {
-    const enrollments = await Enrollment.find({ studentId: id }).populate(
-      "courseId",
-      "title level"
-    );
-    return res.json(enrollments);
+    const enrollments = await Enrollment.find({ studentId: id })
+      .populate("courseId", "title level")     
+      .populate("studentId", "name email dni") 
+      .lean();
+
+    const validEnrollments = enrollments.filter(e => e.courseId);
+
+    const { name, email, dni } = validEnrollments[0]?.studentId || {};
+
+    return res.json({
+      student: { id, name, email, dni },
+      courses: validEnrollments.map(e => ({
+        enrollmentId: e._id,
+        course: {
+          id:    e.courseId._id,
+          title: e.courseId.title,
+          level: e.courseId.level,
+        }
+      }))
+    });
+
   } catch (err) {
     console.error(err);
     return res.status(500).json({ msg: "Error al obtener inscripciones." });
   }
 };
+
+
 const getEnrollmentsByCourse = async (req, res) => {
   const { id } = req.params;
 
@@ -168,30 +186,41 @@ const getEnrollmentsByCourse = async (req, res) => {
   }
 
   try {
-    const course = await Course.findById(id);
+    const course = await Course.findById(id).select("title profesor");
     if (!course) {
       return res.status(404).json({ msg: "Curso no encontrado." });
     }
+
     if (course.profesor.toString() !== req.user._id.toString()) {
-      return res
-        .status(403)
-        .json({
-          msg: "Solo el profesor creador puede ver los inscriptos a este curso.",
-        });
+      return res.status(403).json({
+        msg: "Solo el profesor creador puede ver los inscriptos a este curso.",
+      });
     }
 
-    const enrollments = await Enrollment.find({ courseId: id }).populate(
-      "studentId",
-      "name email"
-    );
-    return res.json(enrollments);
+    const enrollments = await Enrollment.find({ courseId: id })
+      .populate("studentId", "name email dni");
+
+    return res.json({
+      course: {
+        id: course._id,
+        title: course.title,
+      },
+      enrollments: enrollments.map((e) => ({
+        enrollmentId: e._id,
+        student: {
+          id: e.studentId._id,
+          name: e.studentId.name,
+          email: e.studentId.email,
+          dni: e.studentId.dni,
+        },
+      })),
+    });
   } catch (err) {
     console.error(err);
-    return res
-      .status(500)
-      .json({ msg: "Error al obtener alumnos inscriptos." });
+    return res.status(500).json({ msg: "Error al obtener alumnos inscriptos." });
   }
 };
+
 
 const enrollInCourse = async (req, res) => {
   const { courseId } = req.body;

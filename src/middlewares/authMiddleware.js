@@ -3,16 +3,12 @@ const User = require("../models/User");
 
 const authMiddleware = async (req, res, next) => {
   const authHeader = req.headers.authorization;
-
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return res.status(401).json({ msg: "Token faltante o inválido" });
   }
-
   const token = authHeader.split(" ")[1];
-
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    console.log("Token decodificado:", decoded);
     const userId = decoded.id || decoded._id;
     req.user = await User.findById(userId).select("-password");
     if (!req.user) {
@@ -20,7 +16,6 @@ const authMiddleware = async (req, res, next) => {
     }
     next();
   } catch (err) {
-    console.log("Error validando token:", err.message);
     return res.status(401).json({ msg: "Token inválido" });
   }
 };
@@ -39,8 +34,16 @@ const isProfesor = (req, res, next) => {
   next();
 };
 
+const isAlumno = (req, res, next) => {
+  if (req.user.role !== "alumno") {
+    return res.status(403).json({ msg: "Acceso denegado (solo alumno)" });
+  }
+  next();
+};
+
 module.exports = {
   authMiddleware,
   isSuperAdmin,
   isProfesor,
+  isAlumno,
 };

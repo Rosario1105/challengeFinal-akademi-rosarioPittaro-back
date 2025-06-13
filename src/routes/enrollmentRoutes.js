@@ -8,12 +8,25 @@ const {
   getStudentsByProfesor,
 } = require("../controllers/enrollmentController");
 
-const { authMiddleware } = require("../middlewares/authMiddleware");
+const {
+  authMiddleware,
+  isAlumno,
+  isProfesor,
+} = require("../middlewares/authMiddleware");
 
-router.get("/student/:id", authMiddleware, getEnrollmentsByStudent);
-router.get("/course/:id", authMiddleware, getEnrollmentsByCourse);
-router.post("/", authMiddleware, enrollInCourse);
-router.delete("/:id", authMiddleware, cancelEnrollment);
-router.get("/student-profesor", authMiddleware, getStudentsByProfesor);
+router.get("/student/:id", authMiddleware, isAlumno, getEnrollmentsByStudent);
+
+router.get("/course/:id", authMiddleware, isProfesor, getEnrollmentsByCourse);
+
+router.post("/", authMiddleware, isAlumno, enrollInCourse);
+
+router.delete("/:id", authMiddleware, isAlumno, cancelEnrollment);
+
+router.get(
+  "/student-profesor",
+  authMiddleware,
+  isProfesor,
+  getStudentsByProfesor
+);
 
 module.exports = router;

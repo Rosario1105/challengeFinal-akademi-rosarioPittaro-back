@@ -4,32 +4,50 @@ const User = require("../models/User");
 const sendEmails = require("../utils/sendEmails");
 
 const register = async (req, res) => {
-  const { name, email, password, role } = req.body;
+  const { name, email, password, dni, role } = req.body;
 
   try {
-    const exist = await User.findOne({ email });
-    if (exist) return res.status(400).json({ message: "El usuario ya existe" });
+    if (!name || !email || !password || !dni) {
+      return res.status(400).json({ message: "Todos los campos son obligatorios" });
+    }
+    if (password.length < 6) {
+      return res.status(400).json({
+        message: "La contraseña debe tener al menos 6 caracteres",
+      });
+    }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: "El email ya está registrado" });
+    }
+    const existingDni = await User.findOne({ dni });
+    if (existingDni) {
+      return res.status(400).json({ message: "Ya existe un usuario con ese DNI" });
+    }
 
     const user = await User.create({
       name,
       email,
-      password: hashedPassword,
-      role,
+      password,         
+      dni,
+      role: role || "alumno",
     });
+
     res.status(201).json({
       id: user._id,
       name: user.name,
       email: user.email,
+      dni: user.dni,
       role: user.role,
     });
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Error al registrar usuario", error: error.message });
+    res.status(500).json({
+      message: "Error al registrar usuario",
+      error: error.message,
+    });
   }
 };
+
 
 const login = async (req, res) => {
   const { email, password } = req.body;
@@ -39,7 +57,12 @@ const login = async (req, res) => {
     if (!user)
       return res.status(404).json({ message: "Usuario no encontrado" });
 
+    console.log("Password ingresada:", password);
+    console.log("Hash en DB:", user.password);
+
     const validPass = await bcrypt.compare(password, user.password);
+    console.log("¿Contraseña válida?:", validPass);
+
     if (!validPass)
       return res.status(401).json({ message: "Contraseña incorrecta" });
 
@@ -64,6 +87,7 @@ const login = async (req, res) => {
   }
 };
 
+
 const recoverPasswordRequest = async (req, res) => {
   try {
     const { email } = req.body;
@@ -81,7 +105,7 @@ const recoverPasswordRequest = async (req, res) => {
       expiresIn: "1h",
     });
 
-    const frontendURL = 'http://localhost:5713';
+    const frontendURL = 'http://localhost:5173';
 const resetLink = `${frontendURL}/reset-password/${resetToken}`;
 
 
@@ -115,10 +139,13 @@ const resetPassword = async (req, res) => {
     const user = await User.findById(decoded.id);
     if (!user) return res.status(404).json({ msg: "Usuario no encontrado" });
 
-    const hashedPassword = await bcrypt.hash(password, 10);
-    user.password = hashedPassword;
+    user.password = password;
+
+    console.log("Antes de guardar, password:", user.password);
 
     await user.save();
+
+    console.log("Después de guardar, password:", user.password);
 
     res.json({ message: "Contraseña actualizada correctamente" });
   } catch (error) {
@@ -127,6 +154,7 @@ const resetPassword = async (req, res) => {
       .json({ message: "Token inválido o expirado", error: error.message });
   }
 };
+
 
 module.exports = {
   register,
